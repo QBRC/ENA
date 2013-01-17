@@ -1,6 +1,6 @@
 \name{bootstrap}
 \alias{bootstrap}
-\title{Bootstrap the reconstruction of a network from a dataset}
+\title{Bootstrap the reconstruction of a network}
 \usage{
   bootstrap(data, fun, sample.percentage = 0.7,
     iterations = 150, cluster, truth)

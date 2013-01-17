@@ -1,4 +1,4 @@
-#' Bootstrap the reconstruction of a network from a dataset
+#' Bootstrap the reconstruction of a network
 #' 
 #' Randomly selects a subset of the avaialble samples and performs a network reconstruction using the selected technique. Aggregate all produced networks into a single network using the \code{ena} method.
 #' @param data The dataset to reconstruct. Each column should contain one sample, and each row should contain one gene.
