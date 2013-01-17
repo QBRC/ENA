@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+%\VignetteIndexEntry{Using ENA}
+%\VignetteDepends{GeneNet, WGCNA, parmigene, space}
+
+This document will demonstrate the usage of the Ensemble Network Aggregation (ENA) package available on CRAN.
+
+\section{Test Data Setup}
+
+We'll first simulate a matrix of gene expression data. This matrix includes 50 samples profiling the expression of 20 genes.
+
+<<simulateNoise>>=
+simul <- matrix(rnorm(50*20), ncol=50)
+colnames(simul) <- paste("s", 1:50, sep="")
+rownames(simul) <- paste("g", 1:20, sep="")
+@
+
+We'll then inject into this noisy matrix a few obvious correlations; we expect that any network reconstruction technique would be able to identify most of these obvious connections.
+
+<<AddConnections>>=
+#generate a few obvious "trends" which should establish correlations on a few genes.
+simul[5,] <- seq(from=-1, to=1, length.out = ncol(simul))
+simul[10,] <- seq(from=1, to=-1, length.out = ncol(simul))
+simul[15,] <- seq(from=-1, to=1, length.out = ncol(simul))
+simul[20,] <- seq(from=1, to=-1, length.out = ncol(simul))
+@
+
+So genes 5, 10, 15, and 20 are all very strongly correlated (either postively or negatively).
+
+\section{Bootstrapping}
+
+Bootstrapping is a technique in which we randomly select a subset of the available samples in the dataset and the reconstruct the network. We do this multiple times, then merge using Inverse Rank Product (IRP) in order to improve the robustness of the network. The ENA package provides the \texttt{bootstrap()} function for this purpose.
+
+We've found that bootstrapping is particularly effective for certain types of network reconstruction techniques \textemdash SPACE being one of them. We'll use the \texttt{buildSpace()} function, also provided by this package. This command typically creates many lines of output, so we'll suppress them.
+
+<<bootstrapSpace>>=
+library(ENA)
+invisible(capture.output(sp <- bootstrap(simul, "buildSpace")))
+
+head(sp)
+@
+
+The \texttt{bootstrap} function produces an adjacency list represnting the aggregation of all networks produced by bootstrapping the selected function (``buildSpace'').
+
+\section{Method Merging}
+
+Now that we have a sample gene expression matrix, we can proceed to use the ENA package. Our first demonstration will involve reconstructing the network from multiple different reconstruction techniques and then merging the resultant networks together at the end.
+
+<<ReconstructAll>>=
+gn <- buildGenenet(simul)
+wg <- buildWgcna(simul)
+ar <- buildAracne(simul)
+@
+
+These methods return the reconstructed networks in adjacency matrix format. The merging method, however, expects the input in adjacency list format. Additionally, some methods return directed (non-symmetric) matrices which we're not currently handling. So we want to make these matrices symmetric and also convert to adjacency-list format; we can do this simultaneously using the \texttt{symmetricize()} function. We'll also want to take the absolute value since we're not interested in the direction of each edge. Note that the \texttt{bootstrap} function already takes the absolute value and makes the resultant matrix symmetric before converting to adjacency list.
+
+<<symmetricize>>=
+gn <- symmetricize(abs(gn), "max", adjacencyList=TRUE)
+colnames(gn)[3] <- "GeneNet"
+wg <- symmetricize(abs(wg), "max", adjacencyList=TRUE)
+colnames(wg)[3] <- "WGCNA"
+ar <- symmetricize(abs(ar), "max", adjacencyList=TRUE)
+colnames(ar)[3] <- "Aracne"
+@
+
+We're now ready to merge these methods. Often, network reconstruction techniques won't rearrange the order of the genes in the matrix. If this is true, then the first two columns (used for addressing) of each result should be identical for all of the above reconstructed networks. However, you must be cautious, as it's possible that a reconstruction technique could rearrange the order of the genes before returning, in which case the addressing of your adjacency list would be non-identical. To be careful, we'll \texttt{merge} the results, rather than merely \texttt{cbind}ing the columns together -- if you're confident that your addressing columns are all identical, it will be much faster to use \texttt{cbind}.
+
+<<mergeMethods>>=
+add <- getTableAddressing(rownames(simul))
+
+#if all the addressing columns are identical, we can use the faster method.
+if (identical(add[,1:2], gn[,1:2]) && identical(add[,1:2], wg[,1:2]) && identical(gn[,1:2], sp[,1:2]) && identical(gn[,1:2], ar[,1:2])){
+	agg <- cbind(add, gn[,3], wg[,3], sp[,3], ar[,3])
+} else{
+	#build up using merge in case the order of the addressing is incorrect.
+	agg <- merge(add, gn)	
+	agg <- merge(agg, wg)	
+	agg <- merge(agg, sp)	
+	agg <- merge(agg, ar)	
+}
+
+head(agg)
+
+@
+
+Now that we have a conslidated data.frame representing the adjacency list of all the networks produced by each different method, we can merge them using the \texttt{ena()} function. We'll then add it back into the aggregated data.frame for further inspection.
+
+<<ena>>=
+ena <- ena(agg[,3:6])
+agg$ENA <- ena
+@
+
+This network is small enough for manual inspection. You can print out the results using the following statement. We'll find that all methods should have very good performance on this trivial network.
+
+<<inspect>>=
+cbind(agg[,1:2], round(agg[,3:7], 2))
+@
+
+\end{document}

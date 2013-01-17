@@ -1,0 +1,568 @@
+\documentclass{article}
+
+\usepackage{Sweave}
+\begin{document}
+\input{ENASample-concordance}
+%\VignetteIndexEntry{Using ENA}
+%\VignetteDepends{GeneNet, WGCNA, parmigene, space}
+
+This document will demonstrate the usage of the Ensemble Network Aggregation (ENA) package available on CRAN.
+
+\section{Test Data Setup}
+
+We'll first simulate a matrix of gene expression data. This matrix includes 50 samples profiling the expression of 20 genes.
+
+\begin{Schunk}
+\begin{Sinput}
+> simul <- matrix(rnorm(50*20), ncol=50)
+> colnames(simul) <- paste("s", 1:50, sep="")
+> rownames(simul) <- paste("g", 1:20, sep="")
+\end{Sinput}
+\end{Schunk}
+
+We'll then inject into this noisy matrix a few obvious correlations; we expect that any network reconstruction technique would be able to identify most of these obvious connections.
+
+\begin{Schunk}
+\begin{Sinput}
+> #generate a few obvious "trends" which should establish correlations on a few genes.
+> simul[5,] <- seq(from=-1, to=1, length.out = ncol(simul))
+> simul[10,] <- seq(from=1, to=-1, length.out = ncol(simul))
+> simul[15,] <- seq(from=-1, to=1, length.out = ncol(simul))
+> simul[20,] <- seq(from=1, to=-1, length.out = ncol(simul))
+\end{Sinput}
+\end{Schunk}
+
+So genes 5, 10, 15, and 20 are all very strongly correlated (either postively or negatively).
+
+\section{Bootstrapping}
+
+Bootstrapping is a technique in which we randomly select a subset of the available samples in the dataset and the reconstruct the network. We do this multiple times, then merge using Inverse Rank Product (IRP) in order to improve the robustness of the network. The ENA package provides the \code{bootstrap()} function for this purpose.
+
+We've found that bootstrapping is particularly effective for certain types of network reconstruction techniques \textemdash SPACE being one of them. We'll use the \code{buildSpace()} function, also provided by this package.
+
+\begin{Schunk}
+\begin{Sinput}
+> library(ENA)
+> sp <- bootstrap(simul, "buildSpace")
+\end{Sinput}
+\begin{Soutput}
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+[1] "iter=1"
+[1] "iter=2"
+[1] "iter=3"
+\end{Soutput}
+\begin{Sinput}
+> head(sp)
+\end{Sinput}
+\begin{Soutput}
+  Source Dest Bootstrapped.buildSpace
+1     g1   g2             0.001481186
+2     g1   g3             0.001626306
+3     g2   g3             0.001799362
+4     g1   g4             0.001846773
+5     g2   g4             0.001492092
+6     g3   g4             0.001605835
+\end{Soutput}
+\end{Schunk}
+
+The \code{bootstrap} function produces an adjacency list represnting the aggregation of all networks produced by bootstrapping the selected function (``buildSpace'').
+
+\section{Method Merging}
+
+Now that we have a sample gene expression matrix, we can proceed to use the ENA package. Our first demonstration will involve reconstructing the network from multiple different reconstruction techniques and then merging the resultant networks together at the end.
+
+\begin{Schunk}
+\begin{Sinput}
+> gn <- buildGenenet(simul)
+\end{Sinput}
+\begin{Soutput}
+Estimating optimal shrinkage intensity lambda (correlation matrix): 0.3872 
+\end{Soutput}
+\begin{Sinput}
+> wg <- buildWgcna(simul)
+\end{Sinput}
+\begin{Soutput}
+==========================================================================
+*
+*  Package WGCNA 1.20 loaded.
+*
+*    Important note: It appears that your system supports multi-threading,
+*    but it is not enabled within WGCNA in R. 
+*    To allow multi-threading within WGCNA with all available cores, use 
+*
+*          allowWGCNAThreads()
+*
+*    within R. Use disableWGCNAThreads() to disable threading if necessary.
+*    Alternatively, set the following environment variable on your system:
+*
+*          ALLOW_WGCNA_THREADS=<number_of_processors>
+*
+*    for example 
+*
+*          ALLOW_WGCNA_THREADS=12
+*
+*    To set the environment variable in linux bash shell, type 
+*
+*           export ALLOW_WGCNA_THREADS=12
+*
+*     before running R. Other operating systems or shells will
+*     have a similar command to achieve the same aim.
+*
+==========================================================================
+\end{Soutput}
+\begin{Sinput}
+> ar <- buildAracne(simul)
+\end{Sinput}
+\end{Schunk}
+
+These methods return the reconstructed networks in adjacency matrix format. The merging method, however, expects the input in adjacency list format. Additionally, some methods return directed (non-symmetric) matrices which we're not currently handling. So we want to make these matrices symmetric and also convert to adjacency-list format; we can do this simultaneously using the \code{symmetricize()} function. We'll also want to take the absolute value since we're not interested in the direction of each edge. Note that the \code{bootstrap} function already takes the absolute value and makes the resultant matrix symmetric before converting to adjacency list.
+
+\begin{Schunk}
+\begin{Sinput}
+> gn <- symmetricize(abs(gn), "max", adjacencyList=TRUE)
