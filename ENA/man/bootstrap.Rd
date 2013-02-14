@@ -3,7 +3,8 @@
 \title{Bootstrap the reconstruction of a network}
 \usage{
   bootstrap(data, fun, sample.percentage = 0.7,
-    iterations = 150, cluster, truth)
+    gene.percentage = 0.9, iterations = 150, cluster,
+    truth)
 }
 \arguments{
   \item{data}{The dataset to reconstruct. Each column
@@ -17,6 +18,9 @@
 
   \item{sample.percentage}{The percentage of samples to
   select for each iteration.}
+
+  \item{gene.percentage}{The percentage of genes to select
+  for each iteration.}
 
   \item{iterations}{The number of bootstrapping iterations
   to perform -- i.e. the number of networks to build}

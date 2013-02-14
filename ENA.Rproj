@@ -15,4 +15,4 @@ LaTeX: pdfLaTeX
 BuildType: Package
 PackagePath: ENA
 PackageInstallArgs: --no-multiarch
-PackageRoxygenize: rd,namespace
+PackageRoxygenize: rd,collate,namespace
