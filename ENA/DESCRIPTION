@@ -32,3 +32,4 @@ Collate:
     'simulateNetwork.R'
     'adj2mat.R'
     'mat2adj.R'
+    'tri2mat.R'
