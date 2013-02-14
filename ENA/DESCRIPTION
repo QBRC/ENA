@@ -30,3 +30,5 @@ Collate:
     'symmetricize.R'
     'getTableAddressing.R'
     'simulateNetwork.R'
+    'adj2mat.R'
+    'mat2adj.R'
