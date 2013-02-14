@@ -13,7 +13,7 @@
 #' @param noise the amount of noise present in the simulated expression levels.
 #' @author Guanghua Xiao \email{Guanghua.Xiao@@UTSouthwestern.edu}
 #' @export
-simulateNetwork <- function(adjList, genes=union(adjList[,1], adjList[,2]), samples=100, noise=1)
+simulateNetwork <- function(adjList, genes=sort(union(adjList[,1], adjList[,2])), samples=100, noise=1)
 {	
 	#Code gets grumpy when levels of factors are different, just convert to character
 	adjList$Source <- as.character(adjList$Source)

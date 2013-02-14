@@ -3,7 +3,7 @@
 \title{Simulate a gene expression dataset.}
 \usage{
   simulateNetwork(adjList,
-    genes = union(adjList[, 1], adjList[, 2]),
+    genes = sort(union(adjList[, 1], adjList[, 2])),
     samples = 100, noise = 1)
 }
 \arguments{
