@@ -29,3 +29,4 @@ Collate:
     'ena.R'
     'symmetricize.R'
     'getTableAddressing.R'
+    'simulateNetwork.R'
