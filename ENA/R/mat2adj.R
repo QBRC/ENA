@@ -7,6 +7,10 @@
 #' named. 
 #' @author Jeffrey D. Allen \email{Jeffrey.Allen@@UTSouthwestern.edu}
 #' @export
+#' @examples
+#' mat <- matrix(c(1,4,0,4,1,2,0,2,1), ncol=3)
+#' rownames(mat) <- colnames(mat) <- letters[1:3]
+#' mat2adj(mat)
 mat2adj <- function(adjMat){
 	if (!isSymmetric(adjMat)){
 		stop("The matrix provided is not symmetric. Currently, this function only works for symmetric matrices. This includes the rownames and colnames of the matrix.")

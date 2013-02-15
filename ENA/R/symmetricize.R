@@ -14,6 +14,16 @@
 #' @return The symmetric matrix
 #' @export
 #' @author Jeffrey D. Allen \email{Jeffrey.Allen@@UTSouthwestern.edu}
+#' @examples
+#' #Create a sample 3x3 matrix
+#' mat <- matrix(1:9, ncol=3)
+#' 
+#' #Copy the upper diagonal portion to the lower
+#' symmetricize(mat, "ud")
+#' 
+#' #Take the average of each symmetric location
+#' symmetricize(mat, "avg")
+#' 
 symmetricize <-
 function(matrix, method=c("max", "min","avg", "ld", "ud"), adjacencyList=FALSE){
 	method <- match.arg(method)

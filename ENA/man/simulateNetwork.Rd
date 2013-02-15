@@ -30,7 +30,9 @@
   noise levels in the dataset.
 }
 \examples{
+#Load in the sample PPI data provided with this package
 data(PPI)
+#Simulate the network based on one of the adjacency lists just loaded.
 net <- simulateNetwork(net44)
 }
 \author{

@@ -14,6 +14,33 @@
 #' can be converted back to an adjacency matrix using \code{\link{tri2mat}}.
 #' @export
 #' @author Jeffrey D. Allen \email{Jeffrey.Allen@@UTSouthwestern.edu}
+#' @examples
+#' #Load in the sample PPI data provided with this package
+#' data(PPI)
+#' #Simulate the network based on one of the adjacency lists just loaded.
+#' net <- simulateNetwork(net44)
+#' #Reconstruct the network using GeneNet, then grab the upper traingular portion
+#' # of the matrix
+#' gn <- abs(buildGenenet(net))
+#' gn <- gn[upper.tri(gn)]
+#' 
+#' #Process with WGCNA
+#' wg <- abs(buildWgcna(net))
+#' wg <- wg[upper.tri(wg)]
+#' 
+#' #Process with SPACE
+#' sp <- abs(buildSpace(net))
+#' sp <- sp[upper.tri(sp)]
+#' 
+#' #Aggregate methods using ENA
+#' ena <- ena(cbind(gn, wg, sp))
+#' 
+#' #Convert from a triangular vector to a full matrix.
+#' enaMat <- tri2mat(rownames(net), ena)
+#' 
+#' #Extract only those edges in the graph which pass the cutoff
+#' binarized <- edgeCutoff(enaMat, 3)
+#' 
 edgeCutoff <- function(rp, nNets, pfp=0.05, nPerm=100){
 	names <- NULL
 	if(is.matrix(rp)){

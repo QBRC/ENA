@@ -14,7 +14,9 @@
 #' @author Guanghua Xiao \email{Guanghua.Xiao@@UTSouthwestern.edu}
 #' @export
 #' @examples
+#' #Load in the sample PPI data provided with this package
 #' data(PPI)
+#' #Simulate the network based on one of the adjacency lists just loaded.
 #' net <- simulateNetwork(net44)
 simulateNetwork <- function(adjList, genes=sort(union(adjList[,1], adjList[,2])), samples=100, noise=1)
 {	

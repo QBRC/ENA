@@ -39,5 +39,13 @@
 }
 \author{
   Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+  #Load in the sample Protein-Protein-Interaction data that
+  comes with this package. data(PPI) set.seed(123)
+
+  #Simulate a dataset based on the 44-gene topology
+  provided. sim <- simulateNetwork(net44)
+
+  boot <- bootstrap(sim, "buildGenenet", .9, 10, ) bootMat
+  <- tri2mat(rownames(sim), boot[,3])
 }
 

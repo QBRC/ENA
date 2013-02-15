@@ -36,6 +36,16 @@
   positions consistent. A variety of methods are provided
   to make the matrix symmetrical.
 }
+\examples{
+#Create a sample 3x3 matrix
+mat <- matrix(1:9, ncol=3)
+
+#Copy the upper diagonal portion to the lower
+symmetricize(mat, "ud")
+
+#Take the average of each symmetric location
+symmetricize(mat, "avg")
+}
 \author{
   Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }

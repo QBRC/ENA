@@ -17,6 +17,19 @@
 #' @return the complete 2D matrix represented by the traingular portion provided.
 #' @author Jeffrey D. Allen \email{Jeffrey.Allen@@UTSouthwestern.edu}
 #' @export
+#' @examples
+#' #Load in the sample PPI data provided with this package
+#' data(PPI)
+#' #Simulate the network based on one of the adjacency lists just loaded.
+#' net <- simulateNetwork(net44)
+#' #Reconstruct the network using GeneNet, then grab the upper traingular portion
+#' # of the matrix
+#' gn <- abs(buildGenenet(net))
+#' gn <- gn[upper.tri(gn)]
+#'  
+#' #Convert from a triangular vector to a full matrix.
+#' gnMat <- tri2mat(rownames(net), gn)
+#' 
 tri2mat <- function(genes, tri, diag=1, upper=TRUE){
 	mat <- matrix(0, nrow=length(genes), ncol=length(genes))
 	colnames(mat) <- rownames(mat) <- genes
