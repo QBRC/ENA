@@ -9,11 +9,6 @@ test.matrix <- function(){
 	correct[3,4] <- correct[4,3] <- 1
 	colnames(correct) <- rownames(correct) <- letters[1:4]
 	
-	print ("Cut")
-	print(cut)
-	print("Correct")
-	print(correct)
-	
 	checkIdentical(correct, cut)
 }
 

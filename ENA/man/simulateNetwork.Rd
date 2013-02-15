@@ -29,6 +29,10 @@
   allowing cusomtization of the number of samples and the
   noise levels in the dataset.
 }
+\examples{
+data(PPI)
+net <- simulateNetwork(net44)
+}
 \author{
   Guanghua Xiao \email{Guanghua.Xiao@UTSouthwestern.edu}
 }

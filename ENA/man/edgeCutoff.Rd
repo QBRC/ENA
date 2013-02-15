@@ -15,6 +15,9 @@
 
   \item{pfp}{The percentage of false positives to use as a
   cutoff}
+
+  \item{nPerm}{The number of permutations to run when
+  calculating the pfps of the network.}
 }
 \value{
   The binarized network in which only edges surpassing the

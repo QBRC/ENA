@@ -5,6 +5,8 @@
 #' network, as could be computed by the \code{\link{ena}} function.
 #' @param nNets The number of networks used to compute the given rank product
 #' @param pfp The percentage of false positives to use as a cutoff
+#' @param nPerm The number of permutations to run when calculating the pfps of the
+#' network.
 #' @return The binarized network in which only edges surpassing the specified 
 #' significance level are maintained. If \code{rp} was provided as a named matrix, the
 #' results will also be a matrix. If \code{rp} was a vector of the upper triangle,

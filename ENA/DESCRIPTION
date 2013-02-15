@@ -1,8 +1,8 @@
 Package: ENA
 Type: Package
 Title: Ensemble Network Aggregation
-Version: 1.1-103
-Date: 2012-07-17
+Version: 1.2-2
+Date: 2013-02-14
 Author: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
 Maintainer: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
 Depends:
@@ -34,3 +34,4 @@ Collate:
     'mat2adj.R'
     'tri2mat.R'
     'edgeCutoff.R'
+    'data.R'
