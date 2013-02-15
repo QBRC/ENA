@@ -1,7 +1,6 @@
 \name{adj2mat}
 \alias{adj2mat}
-\title{Convert an adjacency-like list (which may or may not contain all the gene
-IDs in the network) into an adjacency matrix.}
+\title{Convert adjacency list into an adjacency matrix.}
 \usage{
   adj2mat(adjList,
     IDs = sort(union(adjList[, 1], adjList[, 2])))
@@ -23,7 +22,7 @@ IDs in the network) into an adjacency matrix.}
   when the ordering of the genes is important.}
 }
 \description{
-  Convert an adjacency-like list (which may or may not
+  Converts an adjacency-like list (which may or may not
   contain all the gene IDs in the network) into an
   adjacency matrix.
 }

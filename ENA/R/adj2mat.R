@@ -1,4 +1,6 @@
-#' Convert an adjacency-like list (which may or may not contain all the gene
+#' Convert adjacency list into an adjacency matrix.
+#' 
+#' Converts an adjacency-like list (which may or may not contain all the gene
 #' IDs in the network) into an adjacency matrix.
 #'
 #' @param adjList the adjacency list of the matrix you're looking to simulate. 

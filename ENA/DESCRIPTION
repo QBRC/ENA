@@ -1,7 +1,7 @@
 Package: ENA
 Type: Package
 Title: Ensemble Network Aggregation
-Version: 1.2-3
+Version: 1.2-4
 Date: 2013-02-14
 Author: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
 Maintainer: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
