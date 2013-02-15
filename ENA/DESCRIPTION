@@ -33,3 +33,4 @@ Collate:
     'adj2mat.R'
     'mat2adj.R'
     'tri2mat.R'
+    'edgeCutoff.R'

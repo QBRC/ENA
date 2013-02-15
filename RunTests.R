@@ -23,6 +23,9 @@ mockBuilder <- function(mat){
 	return(mat2)
 }
 
-testsuite <- defineTestSuite("ENA", dirs="./tests/", testFileRegexp="^runit.+\\.[rR]", testFuncRegexp = "^test.+")
+testsuite <- defineTestSuite("ENA", dirs="./tests/", 
+														 testFileRegexp="^runit.+\\.[rR]", 
+														 testFuncRegexp = "^test.+",
+														 rngKind="Mersenne-Twister")
 testResult <- runTestSuite(testsuite)
 printHTMLProtocol(testResult, "tests/testResults.html")
