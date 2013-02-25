@@ -16,6 +16,15 @@
   Reconstructs a gene regulatory network using the SPACE
   algorithm
 }
+\examples{
+#Load in the sample PPI data provided with this package
+data(PPI)
+#Simulate the network based on one of the adjacency lists just loaded.
+net <- simulateNetwork(net44)
+#Process with SPACE
+sp <- abs(buildSpace(net))
+sp <- sp[upper.tri(sp)]
+}
 \author{
   Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
