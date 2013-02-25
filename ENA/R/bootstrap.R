@@ -10,6 +10,7 @@
 #' @return A data.frame representing the adjacency list of the ENA-produced network.
 #' @export
 #' @author Jeffrey D. Allen \email{Jeffrey.Allen@@UTSouthwestern.edu}
+#' @examples
 #' #Load in the sample Protein-Protein-Interaction data that comes with this package.
 #' data(PPI)
 #' set.seed(123)
