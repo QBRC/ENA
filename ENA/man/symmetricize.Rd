@@ -2,9 +2,8 @@
 \alias{symmetricize}
 \title{Make a matrix symmetric}
 \usage{
-  symmetricize(matrix,
-    method = c("max", "min", "avg", "ld", "ud"),
-    adjacencyList = FALSE)
+symmetricize(matrix, method = c("max", "min", "avg", "ld", "ud"),
+  adjacencyList = FALSE)
 }
 \arguments{
   \item{matrix}{The matrix to make symmatric}
@@ -29,12 +28,12 @@
   provided.}
 }
 \value{
-  The symmetric matrix
+The symmetric matrix
 }
 \description{
-  Make the matrix symmetric by making all "mirrored"
-  positions consistent. A variety of methods are provided
-  to make the matrix symmetrical.
+Make the matrix symmetric by making all "mirrored"
+positions consistent. A variety of methods are provided to
+make the matrix symmetrical.
 }
 \examples{
 #Create a sample 3x3 matrix
@@ -47,6 +46,6 @@ symmetricize(mat, "ud")
 symmetricize(mat, "avg")
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

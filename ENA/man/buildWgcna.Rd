@@ -2,7 +2,7 @@
 \alias{buildWgcna}
 \title{Reconstruct network using WGCNA}
 \usage{
-  buildWgcna(mat)
+buildWgcna(mat)
 }
 \arguments{
   \item{mat}{The matrix on which to reconstruct. The matrix
@@ -11,11 +11,11 @@
   accepts their matrix.}
 }
 \value{
-  The adjacency matrix of the genes provided.
+The adjacency matrix of the genes provided.
 }
 \description{
-  Reconstructs a gene regulatory network using the WGCNA
-  algorithm
+Reconstructs a gene regulatory network using the WGCNA
+algorithm
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -26,6 +26,6 @@ net <- simulateNetwork(net44)
 wg <- abs(buildWgcna(net))
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

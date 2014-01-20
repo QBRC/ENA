@@ -2,8 +2,8 @@
 \alias{bootstrap}
 \title{Bootstrap the reconstruction of a network}
 \usage{
-  bootstrap(data, fun, sample.percentage = 0.7,
-    iterations = 150, cluster, truth)
+bootstrap(data, fun, sample.percentage = 0.7, iterations = 150, cluster,
+  truth)
 }
 \arguments{
   \item{data}{The dataset to reconstruct. Each column
@@ -28,24 +28,27 @@
   available, but useful in testing and debugging.}
 }
 \value{
-  A data.frame representing the adjacency list of the
-  ENA-produced network.
+A data.frame representing the adjacency list of the
+ENA-produced network.
 }
 \description{
-  Randomly selects a subset of the avaialble samples and
-  performs a network reconstruction using the selected
-  technique. Aggregate all produced networks into a single
-  network using the \code{ena} method.
+Randomly selects a subset of the avaialble samples and
+performs a network reconstruction using the selected
+technique. Aggregate all produced networks into a single
+network using the \code{ena} method.
+}
+\examples{
+#Load in the sample Protein-Protein-Interaction data that comes with this package.
+data(PPI)
+set.seed(123)
+
+#Simulate a dataset based on the 44-gene topology provided.
+sim <- simulateNetwork(net44)
+
+boot <- bootstrap(sim, "buildGenenet", .9, 10, )
+bootMat <- tri2mat(rownames(sim), boot[,3])
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
-  #Load in the sample Protein-Protein-Interaction data that
-  comes with this package. data(PPI) set.seed(123)
-
-  #Simulate a dataset based on the 44-gene topology
-  provided. sim <- simulateNetwork(net44)
-
-  boot <- bootstrap(sim, "buildGenenet", .9, 10, ) bootMat
-  <- tri2mat(rownames(sim), boot[,3])
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

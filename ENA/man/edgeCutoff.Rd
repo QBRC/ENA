@@ -2,7 +2,7 @@
 \alias{edgeCutoff}
 \title{Compute a binary network from a continuous rank-product network.}
 \usage{
-  edgeCutoff(rp, nNets, pfp = 0.05, nPerm = 100)
+edgeCutoff(rp, nNets, pfp = 0.05, nPerm = 100)
 }
 \arguments{
   \item{rp}{The rank product of the network you wish to
@@ -20,17 +20,17 @@
   calculating the pfps of the network.}
 }
 \value{
-  The binarized network in which only edges surpassing the
-  specified significance level are maintained. If \code{rp}
-  was provided as a named matrix, the results will also be
-  a matrix. If \code{rp} was a vector of the upper
-  triangle, the result will also be a vector of the upper
-  triangle. Note that an upper triangle can be converted
-  back to an adjacency matrix using \code{\link{tri2mat}}.
+The binarized network in which only edges surpassing the
+specified significance level are maintained. If \code{rp}
+was provided as a named matrix, the results will also be a
+matrix. If \code{rp} was a vector of the upper triangle,
+the result will also be a vector of the upper triangle.
+Note that an upper triangle can be converted back to an
+adjacency matrix using \code{\link{tri2mat}}.
 }
 \description{
-  Compute a binary network from a continuous rank-product
-  network.
+Compute a binary network from a continuous rank-product
+network.
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -60,6 +60,6 @@ enaMat <- tri2mat(rownames(net), ena)
 binarized <- edgeCutoff(enaMat, 3)
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

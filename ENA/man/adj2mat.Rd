@@ -2,8 +2,7 @@
 \alias{adj2mat}
 \title{Convert adjacency list into an adjacency matrix.}
 \usage{
-  adj2mat(adjList,
-    IDs = sort(union(adjList[, 1], adjList[, 2])))
+adj2mat(adjList, IDs = sort(union(adjList[, 1], adjList[, 2])))
 }
 \arguments{
   \item{adjList}{the adjacency list of the matrix you're
@@ -22,9 +21,9 @@
   when the ordering of the genes is important.}
 }
 \description{
-  Converts an adjacency-like list (which may or may not
-  contain all the gene IDs in the network) into an
-  adjacency matrix.
+Converts an adjacency-like list (which may or may not
+contain all the gene IDs in the network) into an adjacency
+matrix.
 }
 \examples{
 #Load in the sample Protein-Protein-Interaction data that comes with this package.
@@ -37,6 +36,6 @@ sim <- simulateNetwork(net44)
 trueMat <- adj2mat(net44)
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

@@ -2,7 +2,7 @@
 \alias{buildSpace}
 \title{Reconstruct network using SPACE}
 \usage{
-  buildSpace(data)
+buildSpace(data)
 }
 \arguments{
   \item{data}{The matrix on which to reconstruct. The
@@ -10,11 +10,11 @@
   column.}
 }
 \value{
-  The adjacency matrix of the genes provided.
+The adjacency matrix of the genes provided.
 }
 \description{
-  Reconstructs a gene regulatory network using the SPACE
-  algorithm
+Reconstructs a gene regulatory network using the SPACE
+algorithm
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -26,6 +26,6 @@ sp <- abs(buildSpace(net))
 sp <- sp[upper.tri(sp)]
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

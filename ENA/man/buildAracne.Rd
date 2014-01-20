@@ -2,7 +2,7 @@
 \alias{buildAracne}
 \title{Reconstruct network using Aracne}
 \usage{
-  buildAracne(mat)
+buildAracne(mat)
 }
 \arguments{
   \item{mat}{The matrix on which to reconstruct. The matrix
@@ -10,11 +10,11 @@
   column.}
 }
 \value{
-  The adjacency matrix of the genes provided.
+The adjacency matrix of the genes provided.
 }
 \description{
-  Reconstructs a gene regulatory network using the Aracne
-  algorithm
+Reconstructs a gene regulatory network using the Aracne
+algorithm
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -27,6 +27,6 @@ ar <- abs(buildAracne(net))
 ar <- ar[upper.tri(ar)]
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

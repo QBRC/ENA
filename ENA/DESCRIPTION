@@ -20,18 +20,3 @@ Description: Ensemble network aggregation is an approach which leverages the
     aggregate the networks produced on different datasets.
 License: GPL (>=2)
 LazyLoad: yes
-Collate:
-    'bootstrap.R'
-    'buildAracne.R'
-    'buildGenenet.R'
-    'buildSpace.R'
-    'buildWgcna.R'
-    'ena.R'
-    'symmetricize.R'
-    'getTableAddressing.R'
-    'simulateNetwork.R'
-    'adj2mat.R'
-    'mat2adj.R'
-    'tri2mat.R'
-    'edgeCutoff.R'
-    'data.R'

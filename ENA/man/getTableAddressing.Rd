@@ -2,7 +2,7 @@
 \alias{getTableAddressing}
 \title{Get the adjacency list addressing template.}
 \usage{
-  getTableAddressing(variableNames, truth)
+getTableAddressing(variableNames, truth)
 }
 \arguments{
   \item{variableNames}{the names of all genes to include in
@@ -12,20 +12,20 @@
   available, but is useful for debugging and testing.}
 }
 \value{
-  A data.frame representing the adjacency list of the
-  matrix provided.
+A data.frame representing the adjacency list of the matrix
+provided.
 }
 \description{
-  Useful if you want to store the networks in their
-  condensed upper-diagonal form while still having the
-  benefit of convenient addressing and/or if you are using
-  a simulated dataset in which you know the truth and want
-  to store all the values in a single data.frame.
+Useful if you want to store the networks in their condensed
+upper-diagonal form while still having the benefit of
+convenient addressing and/or if you are using a simulated
+dataset in which you know the truth and want to store all
+the values in a single data.frame.
 }
 \details{
-  Internal function used to get the addressing template for
-  a data.frame to contain the adjacency list representation
-  of a matrix.
+Internal function used to get the addressing template for a
+data.frame to contain the adjacency list representation of
+a matrix.
 }
 \examples{
 #Load in the sample Protein-Protein-Interaction data that comes with this package.
@@ -49,6 +49,6 @@ data <- getTableAddressing(rownames(sim), trueMat)
 data <- cbind(data, gn, wg)
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

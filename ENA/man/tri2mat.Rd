@@ -2,7 +2,7 @@
 \alias{tri2mat}
 \title{Convert triangular elements to full matrix.}
 \usage{
-  tri2mat(genes, tri, diag = 1, upper = TRUE)
+tri2mat(genes, tri, diag = 1, upper = TRUE)
 }
 \arguments{
   \item{genes}{The names of the genes to use as row and
@@ -25,13 +25,13 @@
   different order.}
 }
 \value{
-  the complete 2D matrix represented by the traingular
-  portion provided.
+the complete 2D matrix represented by the traingular
+portion provided.
 }
 \description{
-  Converts the upper or lower-triangular portion of a
-  matrix back to the complete 2D matrix using the gene
-  names provided. The matrix is assumed to be symmetrical.
+Converts the upper or lower-triangular portion of a matrix
+back to the complete 2D matrix using the gene names
+provided. The matrix is assumed to be symmetrical.
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -47,6 +47,6 @@ gn <- gn[upper.tri(gn)]
 gnMat <- tri2mat(rownames(net), gn)
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

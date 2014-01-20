@@ -2,7 +2,7 @@
 \alias{ena}
 \title{Perform ensemble network aggregation}
 \usage{
-  ena(adjacencyList, method = c("RankProd"))
+ena(adjacencyList, method = c("RankProd"))
 }
 \arguments{
   \item{adjacencyList}{A \code{data.frame} in which each
@@ -14,12 +14,12 @@
   Product, specified by "RankProd"}
 }
 \value{
-  A single adjacency list representing the Inverse Rank
-  Product of all connections in the provided networks.
+A single adjacency list representing the Inverse Rank
+Product of all connections in the provided networks.
 }
 \description{
-  Manipulates adjacency-list-formatted networks into a
-  single adjacency list
+Manipulates adjacency-list-formatted networks into a single
+adjacency list
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -46,6 +46,6 @@ ena <- ena(cbind(gn, wg, sp))
 enaMat <- tri2mat(rownames(net), ena)
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 

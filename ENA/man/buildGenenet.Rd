@@ -2,7 +2,7 @@
 \alias{buildGenenet}
 \title{Reconstruct network using GeneNet}
 \usage{
-  buildGenenet(data)
+buildGenenet(data)
 }
 \arguments{
   \item{data}{The matrix on which to reconstruct. The
@@ -10,11 +10,11 @@
   column.}
 }
 \value{
-  The adjacency matrix of the genes provided.
+The adjacency matrix of the genes provided.
 }
 \description{
-  Reconstructs a gene regulatory network using the GeneNet
-  algorithm
+Reconstructs a gene regulatory network using the GeneNet
+algorithm
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -27,6 +27,6 @@ gn <- abs(buildGenenet(net))
 gn <- gn[upper.tri(gn)]
 }
 \author{
-  Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
+Jeffrey D. Allen \email{Jeffrey.Allen@UTSouthwestern.edu}
 }
 
