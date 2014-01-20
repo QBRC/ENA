@@ -16,9 +16,7 @@
 #' gn <- gn[upper.tri(gn)]
 #' 
 buildGenenet <-
-function(data){
-	library(GeneNet)
-	
+function(data){	
 	inferred.pcor <- ggm.estimate.pcor(t(data));
 	
 	geneList <- rownames(data);

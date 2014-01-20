@@ -17,7 +17,6 @@
 #' 
 buildAracne <-
 function(mat){
-	library(parmigene)
 	mi <- knnmi.all(mat)
 	grn <- aracne.a(mi, 0.05);
 	return (grn);

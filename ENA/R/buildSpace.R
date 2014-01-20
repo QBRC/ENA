@@ -15,7 +15,6 @@
 #' sp <- sp[upper.tri(sp)]
 buildSpace <-
 function(data){
-	library(space)
 	#number of samples
 	n=ncol(data)
 	

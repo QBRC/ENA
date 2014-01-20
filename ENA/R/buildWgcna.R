@@ -14,7 +14,6 @@
 #' wg <- abs(buildWgcna(net))
 buildWgcna <-
 function(mat){
-	library(WGCNA)
 	grn <- adjacency(t(mat))
 	return(grn);
 }
