@@ -6,14 +6,12 @@ Date: 2014-01-20
 Author: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
 Maintainer: Guanghua Xiao <Guanghua.Xiao@UTSouthwestern.edu>
 Depends:
-    R (>= 2.13.0)
+    R (>= 2.14.0)
 Imports:
     space (>= 0.1),
     WGCNA (>= 1.20),
     GeneNet(>= 1.2.5),
     parmigene (>= 1.0)
-Suggests:
-    snow (>= 0.3)
 Description: Ensemble network aggregation is an approach which leverages the
     inverse-rank-product (IRP) method to combine networks. This package
     provides the capabilities to use IRP to bootstrap a dataset using a single
