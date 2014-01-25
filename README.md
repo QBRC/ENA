@@ -9,5 +9,5 @@ Alternatively, you can download the latest build using the `devtools` package.
 
 ```r
 library(devtools)
-install_github("ENA", "QBRC")
+install_github("ENA", "QBRC", subdir="ENA")
 ```

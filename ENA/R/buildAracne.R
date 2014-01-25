@@ -14,6 +14,8 @@
 #' # of the matrix
 #' ar <- abs(buildAracne(net))
 #' ar <- ar[upper.tri(ar)]
+#' @importFrom parmigene knnmi.all
+#' @importFrom parmigene aracne.a
 #' 
 buildAracne <-
 function(mat){

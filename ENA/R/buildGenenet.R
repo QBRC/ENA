@@ -14,6 +14,7 @@
 #' # of the matrix
 #' gn <- abs(buildGenenet(net))
 #' gn <- gn[upper.tri(gn)]
+#' @importFrom GeneNet ggm.estimate.pcor
 #' 
 buildGenenet <-
 function(data){	

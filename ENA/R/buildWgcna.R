@@ -12,6 +12,7 @@
 #' net <- simulateNetwork(net44)
 #' #Process with WGCNA
 #' wg <- abs(buildWgcna(net))
+#' @importFrom WGCNA adjacency
 buildWgcna <-
 function(mat){
 	grn <- adjacency(t(mat))

@@ -2,8 +2,9 @@
 \alias{simulateNetwork}
 \title{Simulate a gene expression dataset.}
 \usage{
-simulateNetwork(adjList, genes = sort(union(adjList[, 1], adjList[, 2])),
-  samples = 100, noise = 1)
+  simulateNetwork(adjList,
+    genes = sort(union(adjList[, 1], adjList[, 2])),
+    samples = 100, noise = 1)
 }
 \arguments{
   \item{adjList}{the adjacency list of the matrix you're
@@ -23,10 +24,10 @@ simulateNetwork(adjList, genes = sort(union(adjList[, 1], adjList[, 2])),
   expression levels.}
 }
 \description{
-Simulates the observed gene expression levels in a dataset
-using the underlying truth network provided, allowing
-cusomtization of the number of samples and the noise levels
-in the dataset.
+  Simulates the observed gene expression levels in a
+  dataset using the underlying truth network provided,
+  allowing cusomtization of the number of samples and the
+  noise levels in the dataset.
 }
 \examples{
 #Load in the sample PPI data provided with this package
@@ -35,6 +36,6 @@ data(PPI)
 net <- simulateNetwork(net44)
 }
 \author{
-Guanghua Xiao \email{Guanghua.Xiao@UTSouthwestern.edu}
+  Guanghua Xiao \email{Guanghua.Xiao@UTSouthwestern.edu}
 }
 
