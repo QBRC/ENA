@@ -21,7 +21,7 @@
 #' boot <- bootstrap(sim, "buildGenenet", .9, 10, )
 #' bootMat <- tri2mat(rownames(sim), boot[,3])
 #' @importFrom parallel clusterExport
-#' @importFrom parallel parLapplyLB
+#' @importFrom parallel parLapply
 bootstrap <- function(data, fun, sample.percentage=0.7, iterations=150, cluster, truth){
 	if (typeof(fun) != "character"){
 		stop("You must provide the character name of the function you want to bootstrap. For instance, fun=\"buildSpace\"")
@@ -45,7 +45,7 @@ bootstrap <- function(data, fun, sample.percentage=0.7, iterations=150, cluster,
 		# but GeneNet depends on corpcor), we have to export this function from
 		# corpcor than GeneNet relies on. No idea.
 		clusterExport(cluster, c("symmetricize", "pcor.shrink"))
-		result <- parLapplyLB(cluster, 1:iterations, funWrapper, fun, data, sample.percentage)	
+		result <- parLapply(cluster, 1:iterations, funWrapper, fun, data, sample.percentage)	
 	}
 	else{ 
 		result <- lapply(1:iterations, funWrapper, fun, data, sample.percentage)		
