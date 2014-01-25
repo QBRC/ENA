@@ -41,7 +41,10 @@ bootstrap <- function(data, fun, sample.percentage=0.7, iterations=150, cluster,
 	toReturn <- getTableAddressing(rownames(data), truth)
 	
 	if (!missing(cluster) && "MPIcluster" %in% class(cluster)){		
-		clusterExport(cluster, c("symmetricize"))
+		# Due to some strange quirk of the depends/imports mess (we import GeneNet
+		# but GeneNet depends on corpcor), we have to export this function from
+		# corpcor than GeneNet relies on. No idea.
+		clusterExport(cluster, c("symmetricize", "pcor.shrink"))
 		result <- parLapplyLB(cluster, 1:iterations, funWrapper, fun, data, sample.percentage)	
 	}
 	else{ 
