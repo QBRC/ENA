@@ -6,7 +6,8 @@ Date: 2014-01-20
 Author: Jeffrey D. Allen <Jeffrey.Allen@UTSouthwestern.edu>
 Maintainer: Guanghua Xiao <Guanghua.Xiao@UTSouthwestern.edu>
 Depends:
-    R (>= 2.14.0)
+    R (>= 2.14.0),
+    GeneNet(>= 1.2.5)
 Imports:
     space (>= 0.1),
     WGCNA (>= 1.20),
